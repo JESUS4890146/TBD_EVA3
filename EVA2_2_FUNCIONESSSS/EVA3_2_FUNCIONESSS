@@ -1,0 +1,89 @@
+[jisus@linuxjisus ~]$ sudo mysql
+[sudo] contraseña para jisus: 
+mysql: Deprecated program name. It will be removed in a future release, use '/usr/bin/mariadb' instead
+Welcome to the MariaDB monitor.  Commands end with ; or \g.
+Your MariaDB connection id is 6
+Server version: 13.0.2-MariaDB Arch Linux
+
+Copyright (c) 2000, 2018, Oracle, MariaDB Corporation Ab and others.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+MariaDB [(none)]> use t3;
+Database changed
+MariaDB [t3]> select comparar_valores(100,50);
++--------------------------+
+| comparar_valores(100,50) |
++--------------------------+
+| 100es mas grande         |
++--------------------------+
+1 row in set (0.001 sec)
+
+MariaDB [t3]> select comparar_valores(10,50);
++-------------------------+
+| comparar_valores(10,50) |
++-------------------------+
+| 50es mas grande         |
++-------------------------+
+1 row in set (0.001 sec)
+
+MariaDB [t3]> select comparar_valores(10,10);
++-------------------------+
+| comparar_valores(10,10) |
++-------------------------+
+| los valores son iguales |
++-------------------------+
+1 row in set (0.001 sec)
+
+MariaDB [t3]> select es_par(50)
+    -> ;
++-----------------+
+| es_par(50)      |
++-----------------+
+| el valor es par |
++-----------------+
+1 row in set (0.001 sec)
+
+MariaDB [t3]> select es_par(51);
++-------------------+
+| es_par(51)        |
++-------------------+
+| el valor es impar |
++-------------------+
+1 row in set (0.001 sec)
+
+MariaDB [t3]> select dia_semana(7);
+ERROR 1305 (42000): FUNCTION t3.dia_semana does not exist
+MariaDB [t3]> select dia_semana(7);
++---------------+
+| dia_semana(7) |
++---------------+
+| sabado        |
++---------------+
+1 row in set (0.001 sec)
+
+MariaDB [t3]> select dia_semana(9);
++-------------------------+
+| dia_semana(9)           |
++-------------------------+
+| numero de dia no valido |
++-------------------------+
+1 row in set (0.001 sec)
+
+MariaDB [t3]> create table ciudad as city_id,city from city;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'city_id,city from city' at line 1
+MariaDB [t3]> CREATE TABLE ciudad AS SELECT city_id, city FROM city;
+ERROR 1146 (42S02): Table 't3.city' doesn't exist
+MariaDB [t3]> CREATE TABLE ciudad AS SELECT city_id, city FROM sakila.city;
+Query OK, 600 rows affected (0.357 sec)
+Records: 600  Duplicates: 0  Warnings: 0
+
+MariaDB [t3]> select contar_ciudades();
++-------------------+
+| contar_ciudades() |
++-------------------+
+|               600 |
++-------------------+
+1 row in set (0.002 sec)
+
+MariaDB [t3
