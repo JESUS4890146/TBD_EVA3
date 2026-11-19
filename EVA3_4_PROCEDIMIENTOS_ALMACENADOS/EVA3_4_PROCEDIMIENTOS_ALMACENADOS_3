@@ -1,0 +1,30 @@
+[jisus@linuxjisus ~]$ sudo mysql
+[sudo] contraseña para jisus: 
+mysql: Deprecated program name. It will be removed in a future release, use '/usr/bin/mariadb' instead
+Welcome to the MariaDB monitor.  Commands end with ; or \g.
+Your MariaDB connection id is 6
+Server version: 13.0.2-MariaDB Arch Linux
+
+Copyright (c) 2000, 2018, Oracle, MariaDB Corporation Ab and others.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+MariaDB [(none)]> use t3;
+Reading table information for completion of table and column names
+You can turn off this feature to get a quicker startup with -A
+
+Database changed
+MariaDB [t3]> call insertar_rfc('jesus', 'meza', 'tapia', '2006-04-07');
+ERROR 1318 (42000): Incorrect number of arguments for FUNCTION t3.generar_rfc; expected 1, got 4
+MariaDB [t3]> call insertar_rfc('jesus', 'meza', 'tapia', '2006-04-07');
+Query OK, 1 row affected (0.042 sec)
+
+MariaDB [t3]> select*from persona;
++------------+--------+--------+--------+------------+
+| rfc        | nombre | ap_pat | ap_mat | fecha_nac  |
++------------+--------+--------+--------+------------+
+| METJ060407 | jesus  | meza   | tapia  | 2006-04-07 |
++------------+--------+--------+--------+------------+
+1 row in set (0.000 sec)
+
+MariaDB [t3]> 
